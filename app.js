@@ -1,13 +1,74 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" },
-    React.createElement("div", { id: "child" }, [React.createElement("h1", {}, "This is an h1 tag nested inside the div tags"),
-    React.createElement("h2", {}, "This is an h2 tag nested inside the div tags")])
-)
+//JSX is transpiled before it reaches the JS by Parcel with the help of Babel that returns the JSX object as a browser compatible JS
 
-console.log(parent);
+// JSX => React.createElement() => JS object => Html element (render)
 
-//creating a root is the functionality of the reactDOM, root is the element over which dom manipulations will act.
+//-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-
+
+//Assignment 3
+
+function Search() {
+    const searchTerm = document.getElementById("searchbox").value;
+
+    if(searchTerm == "apple"){
+        document.getElementById("output").innerHTML = "Search Matched!";
+    }
+    else{
+        document.getElementById("output").innerHTML = "Nothing Matched.";
+    }
+}
+
+const Logo = () => {
+    return <div>
+        <img src="https://unsplash.com/photos/silver-colored-letter-k-wall-decor-jRjHSce08Os" className="logo"></img>
+    </div>
+}
+
+const SearchBar = () => {
+    return (
+        <div>
+            <input type="text" id="searchbox" placeholder="Search Here!"></input>
+            <button onClick={Search}>Search</button>
+            <p id="output"></p>
+        </div>
+    )
+}
+
+const UserIcon = function () {
+    return <div id="usericon">
+        <img src="user.png" className="icon" />
+    </div>
+}
+
+const Header = () => {
+    return (
+        <div id="header">
+            <Logo/>
+            <SearchBar/>
+            <UserIcon/>
+        </div>
+    )
+}
+
+//-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-
+
+const Heading = () => <h1 id="heading"> This is first heading </h1>;
+
+const HeadingComponent = () => {
+    return (
+        <div id="container">
+            {Heading()}
+            <h1 className="heading">This heading is inside a functional Component.</h1>
+        </div>
+    )
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-//rendering the heading tag inside our root element
-root.render(parent);
+root.render(<HeadingComponent/>);
+
+// root.render(header);
+
+root.render(<Header/>);
